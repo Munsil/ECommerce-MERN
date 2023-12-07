@@ -1,6 +1,6 @@
-const { generateToken } = require("../config/jwtToken");
 const User = require("../models/userModel");
 const asyncHandler = require("express-async-handler");
+const { generateToken } = require("../config/jwtToken");
 
 
 const createUser = asyncHandler(async (req, res) => {
@@ -73,9 +73,9 @@ const deleteaUser = asyncHandler(async (req, res) => {
 // UPDATE USER
 
 const updatedUser = asyncHandler(async (req, res) => {
-    const { id } = req.params;
+    const { _id } = req.user;
     try {
-        const updatedUser = await User.findByIdAndUpdate(id, {
+        const updatedUser = await User.findByIdAndUpdate(_id, {
             firstname: req?.body?.firstname,
             lastname: req?.body?.lastname,
             email: req?.body?.email,
