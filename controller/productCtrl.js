@@ -3,11 +3,14 @@ const asyncHandler = require("express-async-handler");
 
 
 const createProduct = asyncHandler(async (req, res) => {
-    res.json(
-        {
-            message: "Heys its product post route",
-        }
-    );
+    try {
+        const newProduct = await Product.create(req.body);
+        res.json(newProduct);
+    }
+    catch (error) {
+        throw new Error(error);
+    }
+
 });
 
 module.exports = { createProduct };
